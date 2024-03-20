@@ -4,13 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
     use HasFactory;
 
-    // The fields listed in the hidden property on the model are automatically hidden from all query results
-    // If you have an edge case where you do want to display one of these fields you can call the makeVisible()
-    // to bring the back
-    public $hidden = ['created_at', 'updated_at'];
+    public $hidden = ['created_at', 'updated_at', 'pivot'];
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +35,6 @@ Route::controller(ProductController::class)->group(function () {
     // 422 - Unprocessable content, automatically used by laravel validation
     // 500 - Something went wrong, don't really know what
 
-
     Route::get('/products', 'all');
     Route::get('/products/{id}', 'find');
     Route::post('/products', 'create');
@@ -43,3 +43,5 @@ Route::controller(ProductController::class)->group(function () {
 });
 
 Route::get('/blog', [BlogPostController::class, 'getAll']);
+
+Route::post('/reviews', [ReviewController::class, 'create']);
